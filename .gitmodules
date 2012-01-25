@@ -1,3 +1,6 @@
 [submodule "emacs-for-python"]
 	path = emacs-for-python
 	url = https://github.com/gabrielelanaro/emacs-for-python.git
+[submodule "pony-mode"]
+	path = pony-mode
+	url = https://github.com/davidmiller/pony-mode.git
