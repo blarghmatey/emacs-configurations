@@ -1,0 +1,49 @@
+(add-to-list 'load-path "~/.emacs.d")
+
+;; General configurations
+(setq inhibit-startup-screen t) ;; Disable startup screen
+(setq-default global-font-lock-mode t) ;; Syntax highlightning on by default
+(setq-default column-number-mode t) ;; show column numbers
+(setq-default line-number-mode t) ;; show current line
+(menu-bar-mode 0) ;; disable the menubar (promotes good emacs memory :)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(setq-default visible-bell t) ;; blinking top and bottom lines instead of speaker buzz
+(setq-default show-trailing-whitespace t) ;; always show trailing whitespace
+
+;; Colorized
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-comidia)))
+
+;; Mac configurations
+(when (equal system-type 'darwin) (require 'mac))
+
+;; For emacs-for-python configurations
+(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+
+(add-to-list 'load-path "~/.emacs.d/emacs-for-python/") ;; tell where to load the various files
+(require 'epy-setup) ;; It will setup other loads, it is required!
+(require 'epy-python) ;; If you want the python facilities [optional]
+(require 'epy-completion) ;; If you want the autocompletion settings [optional]
+(require 'epy-editing) ;; For configurations related to editing [optional]
+(require 'epy-bindings) ;; For my suggested keybindings [optional]
+
+(epy-django-snippets) ;; activate django snippets
+
+(load-library "flymake-cursor")
+(epy-setup-checker "~/.emacs.d/flymake-checker.sh %f")
+
+;; Django specific configurations
+(add-to-list 'load-path "~/.emacs.d/pony-mode")
+(require 'pony-mode)
+
+(autoload 'django-html-mumamo-mode "~/.emacs.d/nxhtml/autostart.el")
+(setq auto-mode-alist
+      (append '(("\\.html?$" . django-html-mumamo-mode)) auto-mode-alist))
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+(setq django-indent-width 4)
