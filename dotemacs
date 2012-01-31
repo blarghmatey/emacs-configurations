@@ -69,3 +69,7 @@
                 (shell-command-history    . 50)
                 tags-file-name
                 register-alist)))
+
+;; psvn mode
+(require 'psvn)
+
